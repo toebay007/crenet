@@ -1,0 +1,65 @@
+p, span, a, h1, h2, h3, h4, h5, h6, th, td{
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: white;
+    font-style: italic;
+}
+.divsd{
+    border: 1px solid red;
+    min-height: 30px;
+}
+body{
+    min-height: 700px;
+    background-image: linear-gradient(blue, rgb(19, 36, 82),rgb(91, 137, 206));
+}
+nav{
+    background-color: transparent;
+}
+.nav-link, .navbar-brand{
+    color: white;
+}
+.btnsz{
+    background-color: rgb(33, 19, 10);
+    color: white;
+    width: 150px;
+    border-radius: 10px;
+    margin-bottom: spx;
+}
+.btnsz:hover{
+    color: white;
+    box-shadow: 1px 2px 2px 2px rgb(9, 9, 61);
+}
+.btfPwd{
+    color: white; 
+    margin-bottom:20px;
+}
+.btfPwd:hover{
+    color: white;
+    text-decoration: none;
+    border: none;
+    font-style: italic;
+    box-shadow: 1px 2px 2px 2px rgb(115, 115, 131);
+}
+.dashImg{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid rgb(49, 49, 92);
+}
+.bnsz{
+    color: white;
+    text-decoration: none;
+    border: 2px solid grey;
+    margin: 5px;
+    width: 250px;
+    border-radius: 20px;
+}
+.bnsz:hover{
+    color: white;
+    text-decoration: none;
+    box-shadow: 1px 2px 2px 2px rgb(115, 115, 131);
+}
