@@ -2,6 +2,10 @@
 
 
 session_start();
+
+if (!isset($_SESSION['crenet'])) {
+    header("location:index.php");
+}
 $status = $_SESSION['statuss'];
 
 require("getDeets.php");
@@ -17,7 +21,8 @@ $users = $_SESSION['crenet'];
 $pics = $_SESSION['pic'];
 $status = $_SESSION['statuss'];
 
-// $cren->getDeeets($id);
+$cren->getPayment($id);
+$cren->countOrders($id);
 // $staffdeat = $cren->getDeeets($id);
 
 

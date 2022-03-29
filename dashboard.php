@@ -1,6 +1,8 @@
 <?php  include "123Headersz.php"; 
 
 $staffdeets = $cren->getDetails();
+$payment = $cren->getPayment($id);
+$total = $cren->countOrders($id);
 
 ?>
 
@@ -35,46 +37,66 @@ $staffdeets = $cren->getDetails();
             <?php  include "notify.php"; ?>
         <div class="col-md-12 divsd" id="homeP">
             <h4 class="text-center">Welcome Akpos</h4>
-            <p>Total income: <span> </span></p>
-            <table class="table table-bordered">
+            <p>Total income: <span> <?php  if(empty($total)){ ?> <?php } else{ foreach ($total as $tots){  ?> <?php echo $tots['sum(amount)']; ?> <?php } }  ?></span></p>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>No</th>
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Payment for</th>
                     </tr>
                 </thead>
+                <tbody>
+                <?php  if(empty($payment)){   ?>
+                        <tr>
+                            <td colspan="3" class="text-center">No amount paid</td>
+                        </tr>
+
+                    <?php } else{ foreach($payment as $pays){  ?>  
+                    <tr>
+                        <td><?php echo $pays['paidOn']; ?></td>
+                        <td><?php echo $pays['amount']; ?></td>
+                        <td><?php echo $pays['purpose']; ?></td>
+                    </tr>
+                    <?php } }  ?>
+                </tbody>
             </table>
         </div>
         <div class="col-md-12 divsd" id="salaryP">
             <h4 class="text-center">Salary Payment</h4>
-            <table class="table table-bordered mt-4">
+            <table class="table mt-4">
                 <thead>
                     <tr>
-                        <th>No</th>
                         <th>Payment to</th>
                         <th>Amount</th>
+                        <th>Purpose</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <form action="#" method="post">
+                    <form action="formclass.php" method="post">
                         <tr>
-                            <td>1</td>
                             <td>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Staff name</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select name="staffsz" class="form-select" aria-label="Default select example">
+                                <option value=""> --- Pick Staff --- </option> 
+                                    <?php foreach ($staffdeets as $userszz) {?>
+                                    <option value="<?php echo $userszz['id']; ?>"><?php echo $userszz['fnamez']; ?>  <?php echo $userszz['lnamez']; ?> </option>
+                                    <?php }
+                                ?>
                                 </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="#">
+                                <input type="numbersz" class="form-control" name="amount">
                             </td>
                             <td>
-                                <button class="btn btn btn-outline-secondary">Pay Staff</button>
+                                <select name="salary" class="form-select" aria-label="Default select example">
+                                    <option value=""> --- Salary Type --- </option> 
+                                    <option value="bulk"> Bulk Salary </option> 
+                                    <option value="part"> Part salary </option> 
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" name="salaMit" class="btn btn btn-outline-secondary">Pay Staff</button>
                             </td>
                         </tr>
                     </form>
@@ -132,7 +154,7 @@ $staffdeets = $cren->getDetails();
         </div>
         <div class="col-md-12 divsd" id="users">
             <h4 class="text-center">List of Users</h4>
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Sn</th>
@@ -160,6 +182,24 @@ $staffdeets = $cren->getDetails();
         </div>
         <div class="col-md-12 divsd" id="EditP">
             <h4 class="text-center">Update Account</h4>
+            <h4>Change Password</h4>
+            <form action="formclass.php?id=<?php echo $id; ?>" method="post">
+                <div class="col-md-4">
+                    <label for="oldPwd">Current Password</label>
+                    <input type="password" id="oldPwd" name="oldPwd1" class="form-control">
+                </div> <br>
+                <div class="col-md-4">
+                    <label for="newPwd12"> New Password</label>
+                        <input type="password" class="form-control" name="newPwd12" id="newPwd12">
+                </div>
+                <div class="col-md-4">
+                    <label for="newPwd13">Confirm Password</label>
+                        <input type="password" class="form-control" name="newPwd13" id="newPwd12">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" name="subPwds" class="btn btn-lg mt-4 bnsz">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

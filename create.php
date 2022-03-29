@@ -72,19 +72,25 @@
         $result = $this->conn->query($sql);
         // print_r($result);
         if ($result->num_rows > 0){
+           
             $deets = $result->fetch_assoc();
 
-            $pwds = $deets['pwdsz'];
+                 // print_r($result);
+                 // echo  $deets['pwdsz'];
+
+                 $pwds = $deets['pwdsz'];
             //validation to check if the user is a new staff or not.
             if(!empty($pwds)){
-                // echo("logged in");
+                
+                    
                     $encrypted = md5($password);
+                        // echo($encrypted);
 
-                        $sql= "SELECT * FROM userz1 WHERE usernamesz = '$username' AND pwdsz = '$encrypted'";
+                        $sql1= "SELECT * FROM userz1 WHERE usernamez = '$username' AND pwdsz = '$encrypted'";
 
-                        $results = $this->conn->query($sql);
+                        $results = $this->conn->query($sql1);
 
-                        //print_r($results);
+                         print_r($results);
                     if ($results->num_rows > 0) { //==1 valid details
                     
                         $deetz = $results->fetch_assoc();
@@ -100,29 +106,31 @@
                             if($_SESSION['statuss'] === 'staff'){
                                 // redirect to staff website
 
-                                header("location:/user/index.php?login=success");
+                                header("location:staffdashboard.php?login=success");
 
                             } else if($_SESSION['statuss'] === 'admin'){
                                 // redirect to admin website
 
-                                header("location:/staffdashboard.php?login=success");
+                                header("location:dashboard.php?login=success");
 
                             } else{
                                 header ("location:index.php?oldStaffstatus=error");
                             }
                     
                     } else {
-                        header ("location:index.php?oldStafflogin=fail");
+                        header ("location:index.php?Stafflogin=fail");
                     }
 
-            }else{
-                // echo"NewBie"; 
-                     $sql= "SELECT * FROM userz1 WHERE usernamez = '$username' AND newPwd = '$password'";
+         } else {    
+
+             // echo"NewBie"; 
+
+              $sql= "SELECT * FROM userz1 WHERE usernamez = '$username' AND newPwd = '$password'";
 
 
-                        $results = $this->conn->query($sql);
+                        $result = $this->conn->query($sql);
 
-                            //print_r($results);
+                            // print_r($result);
                     if ($result->num_rows > 0) { //==1 valid details
                     
                         $deetz = $result->fetch_assoc();
@@ -162,6 +170,29 @@
         }
 
     }
+
+
+    function salary($staffsz,$amount,$salary){
+
+        $sql = "INSERT INTO salary SET
+        usersz = $staffsz,
+        amount = '$amount',
+        purpose = '$salary'";
+
+         $id = $this->conn->insert_id;
+
+        $result = $this->conn->query($sql);
+
+        if($result == true){
+            header("location:dashboard.php?payment=succesful");
+        } else{
+            header("location:dashboard.php?payment=failed");
+        }
+
+
+    }
+
+
 
 
 

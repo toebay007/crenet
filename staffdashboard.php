@@ -2,6 +2,9 @@
 
 $staffdeets = $cren->getDetails();
 
+$payment = $cren->getPayment($id);
+$total = $cren->countOrders($id);
+
 ?>
 
 <div class="row divsd" style="margin-top: 40px;">
@@ -20,20 +23,51 @@ $staffdeets = $cren->getDetails();
             <?php  include "notify.php"; ?>
         <div class="col-md-12 divsd" id="homeP">
             <h4 class="text-center">Welcome Akpos</h4>
-            <p>Total income: <span> </span></p>
+            <p>Total income: <span> <?php  if(empty($total)){ ?> <?php } else{ foreach ($total as $tots){  ?> <?php echo $tots['sum(amount)']; ?> <?php } }  ?></span></p>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>No</th>
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Payment for</th>
                     </tr>
                 </thead>
+                <tbody>
+                <?php  if(empty($payment)){   ?>
+                        <tr>
+                            <td colspan="3" class="text-center">No amount paid</td>
+                        </tr>
+
+                    <?php } else{ foreach($payment as $pays){  ?>  
+                    <tr>
+                        <td><?php echo $pays['paidOn']; ?></td>
+                        <td><?php echo $pays['amount']; ?></td>
+                        <td><?php echo $pays['purpose']; ?></td>
+                    </tr>
+                    <?php } }  ?>
+                </tbody>
             </table>
         </div>   
         <div class="col-md-12 divsd" id="EditP">
             <h4 class="text-center">Update Account</h4>
+            <h4>Change Password</h4>
+            <form action="formclass.php?id=<?php echo $id; ?>" method="post">
+                <div class="col-md-4">
+                    <label for="oldPwd">Current Password</label>
+                    <input type="password" id="oldPwd" name="oldPwd1" class="form-control">
+                </div> <br>
+                <div class="col-md-4">
+                    <label for="newPwd12"> New Password</label>
+                        <input type="password" class="form-control" name="newPwd12" id="newPwd12">
+                </div>
+                <div class="col-md-4">
+                    <label for="newPwd13">Confirm Password</label>
+                        <input type="password" class="form-control" name="newPwd13" id="newPwd12">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" name="subPwds" class="btn btn-lg mt-4 bnsz">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

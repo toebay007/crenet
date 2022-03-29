@@ -1,4 +1,9 @@
-<?php include "123Headersz.php"; ?>
+<?php
+
+error_reporting(0);
+session_start();
+
+include "123Headersz.php"; ?>
     <div class="row divsd mt-4">
         <div class="col-md-6 offset-md-3 divsd text-center">
             <h4 class="mt-4">WELCOME TO CRENET PORTAL</h4>
@@ -19,4 +24,4 @@
             </div>
         </div>
     </div>
-<?php include "456footersz.php" ?>
+<?php include "456footersz.php";  ?>
