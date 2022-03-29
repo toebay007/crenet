@@ -1,4 +1,4 @@
-p, span, a, h1, h2, h3, h4, h5, h6, th, td{
+p, span, a, h1, h2, h3, h4, h5, h6, th, td, div, label{
     color: white;
 }
 a{
@@ -9,7 +9,6 @@ a:hover{
     font-style: italic;
 }
 .divsd{
-    border: 1px solid red;
     min-height: 30px;
 }
 body{
@@ -55,7 +54,7 @@ nav{
     text-decoration: none;
     border: 2px solid grey;
     margin: 5px;
-    width: 250px;
+    width: 200px;
     border-radius: 20px;
 }
 .bnsz:hover{

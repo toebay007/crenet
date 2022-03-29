@@ -1,3 +1,28 @@
+<?php 
+
+
+session_start();
+$status = $_SESSION['statuss'];
+
+require("getDeets.php");
+$cren = new staff;
+
+// if (!isset( $_SESSION['Crenet']) || $status === 'staff') {
+//     header("location:../index.php");
+// }
+
+$id = $_SESSION['id'];
+$name = $_SESSION['fnamez']." ".$_SESSION['lnamez'];
+$users = $_SESSION['crenet'];
+$pics = $_SESSION['pic'];
+$status = $_SESSION['statuss'];
+
+// $cren->getDeeets($id);
+// $staffdeat = $cren->getDeeets($id);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +58,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link">Contact</a>
                                 </li>
+                                <?php if(isset($users)){ ?>
+                                <li class="nav-item">
+                                    <a href="logout.php" class="nav-link">Log out</a>
+                                </li>
+                                <?php }else{} ?>
                             </ul>
                         </div>
                     </div>
