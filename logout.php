@@ -3,8 +3,8 @@
 session_start();
 
 
-if (isset($_SESSION['usernamez'])) {
-	session_unset($_SESSION['usernamez']);
+if (isset($_SESSION['statuss'])) {
+	session_unset($_SESSION['statuss']);
 	session_destroy();
 
 }

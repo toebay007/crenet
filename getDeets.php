@@ -46,57 +46,130 @@
                         
                     $_SESSION['pwds'] = $deetz['newPwd'];
                     $_SESSION['statuss'] = $deetz['statuss'];
-                    $idzs =  $_SESSION['pwds'];
 
-                   // echo $oldPwd1;
+                    //
+                    $_SESSION['newPP'] = $deetz['pwdsz'];
+                    $currentPassword = $_SESSION['newPP'];
+
+                    //
+                    $idzs =  $_SESSION['pwds'];
+                    if(empty($currentPassword)){
+                        // treat as fresh login from user 
+                        // echo "New user";
+
+                        // echo $oldPwd1;
 
                     if($oldPwd1 === $idzs){
 
-                       // echo $oldPwd1;
-                         if($newPwd12 === $newPwd13 && strlen($newPwd12) >= 6){
-                             // encrypt password
-                            $encrypted = md5($newPwd12);
-                           // echo $newPwd13;
-                            $sql1 = "UPDATE userz1 SET pwdsz ='$encrypted' WHERE id = $id";
-                            $ids = $this->conns->insert_id;
-                                                    
-                            $result = $this->conns->query($sql1);
-                                // var_dump($result);
-                                    if($result == true){
-                                        
-                                        if($_SESSION['statuss'] === 'staff'){
-                                            header("location:staffdashboard.php?pwd=successful");
-                                        } else if($_SESSION['statuss'] === 'admin'){
-                                            header("location:dashboard.php?pwd=successful");
-                                        }
-                                        
-
-                                    }else{
-                                        if($_SESSION['statuss'] === 'staff'){
-                                            header("location:staffdashboard.php?pwd=tryAgain");
-                                        } else if($_SESSION['statuss'] === 'admin'){
-                                            header("location:dashboard.php?pwd=tryAgain");
-                                        }
-                                    }
-                         } else{
-                            if($_SESSION['statuss'] === 'staff'){
-                                header("location:staffdashboard.php?pwd=noMatch");
-                            } else if($_SESSION['statuss'] === 'admin'){
-                                header("location:dashboard.php?pwd=noMatch");
-                            }
-                        }
+                        // echo $oldPwd1;
+                          if($newPwd12 === $newPwd13 && strlen($newPwd12) >= 6){
+                              // encrypt password
+                             $encrypted = md5($newPwd12);
+                            // echo $newPwd13;
+                             $sql1 = "UPDATE userz1 SET pwdsz ='$encrypted' WHERE id = $id";
+                             $ids = $this->conns->insert_id;
+                                                     
+                             $result = $this->conns->query($sql1);
+                                 // var_dump($result);
+                                     if($result == true){
+                                         
+                                         if($_SESSION['statuss'] === 'staff'){
+                                             header("location:staffdashboard.php?pwd=successful");
+                                         } else if($_SESSION['statuss'] === 'admin'){
+                                             header("location:dashboard.php?pwd=successful");
+                                         }
+                                         
+ 
+                                     }else{
+                                         if($_SESSION['statuss'] === 'staff'){
+                                             header("location:staffdashboard.php?pwd=tryAgain");
+                                         } else if($_SESSION['statuss'] === 'admin'){
+                                             header("location:dashboard.php?pwd=tryAgain");
+                                         }
+                                     }
+                          } else{
+                             if($_SESSION['statuss'] === 'staff'){
+                                 header("location:staffdashboard.php?pwd=noMatch");
+                             } else if($_SESSION['statuss'] === 'admin'){
+                                 header("location:dashboard.php?pwd=noMatch");
+                             }
+                         }
+ 
+ 
+                     } else{
+                         if($_SESSION['statuss'] === 'staff'){
+                             header("location:staffdashboard.php?pwd=incorrect");
+                         } else if($_SESSION['statuss'] === 'admin'){
+                             header("location:dashboard.php?pwd=incorrect");
+                         }
+                         
+                     }
 
 
                     } else{
-                        if($_SESSION['statuss'] === 'staff'){
-                            header("location:staffdashboard.php?pwd=incorrect");
-                        } else if($_SESSION['statuss'] === 'admin'){
-                            header("location:dashboard.php?pwd=incorrect");
-                        }
-                        
+                        // treat as old login
+                       // echo "Old user";
+                       
+                      $encryptedsz = md5($oldPwd1);
+                        echo $currentPassword;
+
+                    if($encryptedsz === $currentPassword){
+
+                        // echo $oldPwd1;
+                          if($newPwd12 === $newPwd13 && strlen($newPwd12) >= 6){
+                              // encrypt password
+                             $encrypted = md5($newPwd12);
+                            // echo $newPwd13;
+                             $sql1 = "UPDATE userz1 SET pwdsz ='$encrypted' WHERE id = $id";
+                             $ids = $this->conns->insert_id;
+                                                     
+                             $result = $this->conns->query($sql1);
+                                 // var_dump($result);
+                                     if($result == true){
+                                         
+                                         if($_SESSION['statuss'] === 'staff'){
+                                             header("location:staffdashboard.php?pwd=successful");
+                                         } else if($_SESSION['statuss'] === 'admin'){
+                                             header("location:dashboard.php?pwd=successful");
+                                         }
+                                         
+ 
+                                     }else{
+                                         if($_SESSION['statuss'] === 'staff'){
+                                             header("location:staffdashboard.php?pwd=tryAgain");
+                                         } else if($_SESSION['statuss'] === 'admin'){
+                                             header("location:dashboard.php?pwd=tryAgain");
+                                         }
+                                     }
+                          } else{
+                             if($_SESSION['statuss'] === 'staff'){
+                                 header("location:staffdashboard.php?pwd=noMatch");
+                             } else if($_SESSION['statuss'] === 'admin'){
+                                 header("location:dashboard.php?pwd=noMatch");
+                             }
+                         }
+ 
+ 
+                     } else{
+                         if($_SESSION['statuss'] === 'staff'){
+                             header("location:staffdashboard.php?pwd=incorrect");
+                         } else if($_SESSION['statuss'] === 'admin'){
+                             header("location:dashboard.php?pwd=incorrect");
+                         }
+                         
+                     }
+
                     }
 
+                } else{
+                    if($_SESSION['statuss'] === 'staff'){
+                        header("location:staffdashboard.php?pwd=DbDown");
+                    } else if($_SESSION['statuss'] === 'admin'){
+                        header("location:dashboard.php?pwd=DbDown");
+                    }
+                    
                 }
+
 
                 // $items = [];
                 // if ($result->num_rows > 0){
@@ -124,7 +197,7 @@
 
             function countOrders($id){
 
-                $sql = "SELECT usersz, purpose, sum(amount) FROM salary WHERE usersz=$id";
+                $sql = "SELECT usersz, purpose, sum(salary.amount) as amount, userz1.pPhoto, userz1.lnamez FROM salary JOIN userz1 ON salary.usersz=userz1.id WHERE usersz=$id";
                 $result = $this->conns->query($sql);
     
                 $items = [];

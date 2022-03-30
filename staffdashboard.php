@@ -10,7 +10,9 @@ $total = $cren->countOrders($id);
 <div class="row divsd" style="margin-top: 40px;">
     <div class="col-md-3 divsd">
         <div class="col-md-10 offset-md-1 divsd text-center">
-            <img src="images/Screenshot 2022-02-13 164034.jpg" alt="User Photo" class="dashImg">
+            <?php  if(empty($total)){ ?> <?php } else{ foreach ($total as $tots){  ?> 
+                <img src="<?php echo $tots['pPhoto']; ?>" alt="User Photo" class="dashImg">
+            <?php } }  ?>
             <a href="staffdashboard.php"><h4>Dashboard</h4></a>
         </div>
         <div class="col-md-10 offset-md-1 divsd text-center">
@@ -22,8 +24,10 @@ $total = $cren->countOrders($id);
     <div class="col-md-9 divsd">
             <?php  include "notify.php"; ?>
         <div class="col-md-12 divsd" id="homeP">
-            <h4 class="text-center">Welcome Akpos</h4>
-            <p>Total income: <span> <?php  if(empty($total)){ ?> <?php } else{ foreach ($total as $tots){  ?> <?php echo $tots['sum(amount)']; ?> <?php } }  ?></span></p>
+            <?php  if(empty($total)){ ?> <?php } else{ foreach ($total as $tots){  ?> 
+            <h4 class="text-center">Welcome <?php echo $tots['lnamez']; ?></h4>
+            <p>Total income: <span><?php echo $tots['amount']; ?></span></p>
+            <?php } }  ?>
             <table class="table table-bordered">
                 <thead>
                     <tr>

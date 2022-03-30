@@ -44,9 +44,68 @@
                                 }
                             ?>
                             <?php
+                            if (isset($_GET['Stafflogin']) && ($_GET['Stafflogin'] == 'fail')) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-center">';
+                                echo 'Wrong Password.';
+                                echo '</div>';
+                                }
+                            ?>
+                            <!-- logging out -->
+                            <?php
                             if (isset($_GET['loggedout']) && ($_GET['loggedout'] == 'success')) {
                                 echo '<div class="alert alert-success alert-dismissible fade show text-center">';
                                 echo 'Logged out successfully';
+                                echo '</div>';
+                            }
+                        ?>
+                        <!-- Changed password notification -->
+                        <?php
+                            if (isset($_GET['pwd']) && ($_GET['pwd'] == 'successful')) {
+                                echo '<div class="alert alert-success alert-dismissible fade show text-center">';
+                                echo 'Password changed successfully';
+                                echo '</div>';
+                            }
+                        ?>
+                        <?php
+                            if (isset($_GET['pwd']) && ($_GET['pwd'] == 'tryAgain')) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-center">';
+                                echo 'Can not change password at this time, please try again. And check your DB while at that';
+                                echo '</div>';
+                            }
+                        ?>
+                        <?php
+                            if (isset($_GET['pwd']) && ($_GET['pwd'] == 'noMatch')) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-center">';
+                                echo 'Password do not match or Password is less than 6 characters';
+                                echo '</div>';
+                            }
+                        ?>
+                        <?php
+                            if (isset($_GET['pwd']) && ($_GET['pwd'] == 'incorrect')) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-center">';
+                                echo 'Old passwords is wrong';
+                                echo '</div>';
+                            }
+                        ?>
+                        <?php
+                            if (isset($_GET['pwd']) && ($_GET['pwd'] == 'DbDown')) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-center">';
+                                echo 'Check Databse connection';
+                                echo '</div>';
+                            }
+                        ?>
+                        <!-- salary notification -->
+                        <?php
+                            if (isset($_GET['payment']) && ($_GET['payment'] == 'succesful')) {
+                                echo '<div class="alert alert-success alert-dismissible fade show text-center">';
+                                echo 'Payment completed';
+                                echo '</div>';
+                            }
+                        ?>
+                        <?php
+                            if (isset($_GET['payment']) && ($_GET['payment'] == 'failed')) {
+                                echo '<div class="alert alert-danger alert-dismissible fade show text-center">';
+                                echo 'Payment failed, check that all details are complete';
                                 echo '</div>';
                             }
                         ?>
